@@ -20,22 +20,6 @@ A real-time webcam-based Morse code detection and assistive communication protot
 - Webcam
 - Good, even lighting
 
-## Setup (PowerShell)
-```powershell
-cd "W:\Major project\AI-Enabled Assistive Communication Through Eye Blink Pattern Analysis"
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-```
-If your existing environment has a newer incompatible MediaPipe/OpenCV, use the clean install below.
-
-### Recommended clean dependency install
-```powershell
-python -m pip uninstall -y mediapipe opencv-python opencv-contrib-python numpy scipy pillow
-pip install -r requirements.txt
-```
-Do not install `opencv-python` and `opencv-contrib-python` together in this environment; they both provide the `cv2` module.
-
 ## Run
 ```powershell
 python app.py
@@ -47,12 +31,6 @@ Click **Start Camera**, look at the webcam, and keep your eyes open while the ca
 - Pause about 2.5 seconds to insert a word space
 
 Use **Calibrate** with eyes open if the threshold needs adjustment. Change the values in `config.py` for your camera/lighting.
-
-## Troubleshooting
-- **Camera unavailable:** close Teams/Zoom/Camera app; verify Windows Settings → Privacy & security → Camera access; try `CAMERA_INDEX = 1`.
-- **MediaPipe has no `solutions`:** reinstall the pinned version: `pip install --force-reinstall mediapipe==0.10.21`.
-- **Low detection quality:** face the camera, avoid backlighting, and keep the camera close to eye level.
-- **The first calibration:** keep eyes comfortably open; do not stare painfully or force your eyes open.
 
 ## Accessibility notes
 The app provides a high-contrast palette, large decoded text, adjustable text sizing, keyboard shortcuts, visible status feedback, and state labels. Controls can be reached using normal Tkinter keyboard focus traversal (Tab/Shift+Tab); button focus styling is emphasized.
@@ -72,11 +50,5 @@ flowchart LR
     H --> I[Save Text / Logs]
 ```
 
-## Resume description
-**AI-Enabled Assistive Communication Through Eye Blink Pattern Analysis** — Developed a real-time webcam-based assistive communication prototype using Python, OpenCV, and MediaPipe Face Mesh. Implemented EAR-based eye-state estimation, calibration and blink-duration classification, Morse-code decoding, and a high-contrast Tkinter interface with keyboard controls, live status metrics, and text export.
-
 ## Limitations
-This is a learning/resume prototype, not a clinically validated assistive device. Blink timing varies by user and environment. It should not be used as the sole method for emergency or critical communication.
-
-## License
-MIT — see `LICENSE`.
+This is a learning/resume prototype, not a clinically validated assistive device. Blink timing varies by user and environment.
