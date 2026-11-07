@@ -1,54 +1,83 @@
 # Morse Code Detection Using Machine Learning
 
-A real-time webcam-based Morse code detection and assistive communication prototype. It estimates eye openness using MediaPipe Face Mesh and Eye Aspect Ratio (EAR), classifies blink duration as Morse dots/dashes, and decodes letters into a live text panel.
+A real-time, webcam-based Morse code detection and assistive communication system that converts eye blinks into readable text. The application uses **MediaPipe Face Mesh, Eye Aspect Ratio (EAR), and Python-based blink classification** to detect Morse code signals and decode them into letters, numbers, and words.
 
-## Features
-- Webcam-based eye landmark tracking
-- Smoothed EAR-based blink detection
-- Open-eye calibration
-- Morse alphabet and digit decoding
-- Letter and word pause handling
-- Accessible, high-contrast Tkinter dashboard with large message text
-- Keyboard shortcuts: `Space` pause/resume, `Esc` stop, `Ctrl+S` save, `Ctrl++`/`Ctrl+-` adjust decoded text size, `Ctrl+0` reset text size
-- Adjustable decoded-message text (11–30 pt) with visible A− / A+ / Reset controls
-- Save output to `output/decoded_message.txt`
-- Timestamped logs in `logs/app.log`
+## Key Features
 
-## Requirements
+- **Real-Time Eye Tracking:** Uses MediaPipe Face Mesh to detect facial landmarks and track eye movements through a webcam.
+- **Blink Detection:** Implements Eye Aspect Ratio (EAR) with smoothing techniques to identify eye blinks accurately.
+- **Morse Code Classification:** Classifies short and long blinks into Morse dots and dashes.
+- **Automatic Decoding:** Converts Morse sequences into letters and digits using Morse code mapping.
+- **Pause-Based Recognition:** Detects letter and word boundaries using configurable time intervals.
+- **Open-Eye Calibration:** Provides an initial calibration process to adapt detection thresholds to individual users.
+- **Accessible Dashboard:** Features a high-contrast Tkinter interface with large, adjustable decoded text.
+- **Message Management:** Supports saving decoded messages to a text file.
+- **Keyboard Accessibility:** Includes shortcuts for pausing, resuming, saving messages, and adjusting text size.
+
+## Technology Stack
+
+- **Programming Language:** Python 3.10
+- **Computer Vision:** OpenCV
+- **Facial Landmark Detection:** MediaPipe Face Mesh
+- **Blink Detection:** Eye Aspect Ratio (EAR)
+- **Graphical User Interface:** Tkinter
+- **Data Storage:** Text files and application logs
+
+## System Workflow
+
+1. Capture real-time video through the webcam.
+2. Detect facial and eye landmarks using MediaPipe Face Mesh.
+3. Calculate the Eye Aspect Ratio to estimate eye openness.
+4. Identify blink duration and classify signals as dots or dashes.
+5. Decode Morse sequences into corresponding characters.
+6. Display the decoded message in the live dashboard.
+
+## Installation and Execution
+
+### Requirements
+
 - Windows 10/11
 - Python 3.10 (recommended)
 - Webcam
-- Good, even lighting
+- Proper lighting conditions
 
-## Run
-```powershell
+### Run the Application
+```
 python app.py
 ```
-Click **Start Camera**, look at the webcam, and keep your eyes open while the calibration runs. Blink naturally:
-- Short blink: dot
-- Longer blink: dash
-- Pause about 1.2 seconds to finish a letter
-- Pause about 2.5 seconds to insert a word space
 
-Use **Calibrate** with eyes open if the threshold needs adjustment. Change the values in `config.py` for your camera/lighting.
+Click **Start Camera** and keep your eyes open during calibration. Once calibration is complete, blink naturally to communicate using Morse code.
 
-## Accessibility notes
-The app provides a high-contrast palette, large decoded text, adjustable text sizing, keyboard shortcuts, visible status feedback, and state labels. Controls can be reached using normal Tkinter keyboard focus traversal (Tab/Shift+Tab); button focus styling is emphasized.
+### Morse Code Input
 
-**Accessibility validation status:** These are accessibility-supporting design features, not a claim of WCAG 2.0 or Section 508 conformance. Tkinter screen-reader behavior depends on the operating system and accessibility tooling. Before making a standards-based claim, manually evaluate applicable criteria (for example, text contrast, keyboard operation, focus visibility, and text resizing) and document the test results. A future web front end should use semantic HTML, visible focus, ARIA live regions, and WCAG testing.
+- Short blink: Dot (.)
+- Long blink: Dash (-)
+- Approximately 1.2-second pause: Complete current letter
+- Approximately 2.5-second pause: Insert a word space
 
-## Architecture
-```mermaid
-flowchart LR
-    A[Webcam] --> B[OpenCV Frame Capture]
-    B --> C[MediaPipe Face Mesh]
-    C --> D[Eye Landmark Coordinates]
-    D --> E[EAR + Smoothing]
-    E --> F[Blink Duration Classifier]
-    F --> G[Morse Decoder]
-    G --> H[Accessible Tkinter UI]
-    H --> I[Save Text / Logs]
-```
+Use the **Calibrate** option to adjust the eye-openness threshold when required.
 
-## Limitations
-This is a learning/resume prototype, not a clinically validated assistive device. Blink timing varies by user and environment.
+
+## Accessibility Features
+
+- High-contrast user interface.
+- Large and adjustable decoded-message text.
+- Keyboard-accessible controls.
+- Visible application status and feedback.
+- Emphasized keyboard focus styling.
+
+## Limitations and Future Improvements
+
+This project is an educational prototype and has not been clinically validated as an assistive communication device. Blink duration may vary depending on individual users, lighting, and environmental conditions.
+
+Potential future enhancements include:
+
+- Personalized blink-duration calibration.
+- Improved noise filtering and blink classification.
+- Multilingual message decoding.
+- Speech-to-text and text-to-speech integration.
+- Web-based deployment for broader accessibility.
+
+## Project Objective
+
+The primary objective is to explore how computer vision and machine learning techniques can support accessible communication by translating eye-blink patterns into meaningful text.
